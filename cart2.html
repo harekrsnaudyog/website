@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - Hare Krishna Udyog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <i class="fas fa-om"></i>
+                    <span>Harekrishna Udyog</span>
+                </a>
+            </div>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="cart-icon">
+                        <a href="cart.html">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Main Section -->
+    <main class="cart-main">
+        <div class="container">
+            <h1 class="page-title">Your Shopping Cart</h1>
+            
+            <div class="cart-container">
+                <!-- Cart Items -->
+                <div class="cart-items">
+                    <div class="cart-header">
+                        <h3>Product</h3>
+                        <h3>Price</h3>
+                        <h3>Quantity</h3>
+                        <h3>Total</h3>
+                        <h3>Action</h3>
+                    </div>
+                    
+                    <div class="cart-item">
+                        <div class="product-info">
+                            <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Men's Cotton Kurta">
+                            <div class="product-details">
+                                <h4>Men's Cotton Kurta</h4>
+                                <p>Color: White | Size: L</p>
+                                <p class="collection">Men's Collection</p>
+                            </div>
+                        </div>
+                        <div class="product-price">₹899</div>
+                        <div class="product-quantity">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" value="1" min="1" class="quantity-input">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="product-total">₹899</div>
+                        <div class="product-remove">
+                            <button class="remove-btn"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-item">
+                        <div class="product-info">
+                            <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Women's Silk Saree">
+                            <div class="product-details">
+                                <h4>Women's Silk Saree</h4>
+                                <p>Color: Red | Blouse: Included</p>
+                                <p class="collection">Women's Collection</p>
+                            </div>
+                        </div>
+                        <div class="product-price">₹2499</div>
+                        <div class="product-quantity">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="number" value="2" min="1" class="quantity-input">
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="product-total">₹4998</div>
+                        <div class="product-remove">
+                            <button class="remove-btn"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cart Summary -->
+                <div class="cart-summary">
+                    <h3>Order Summary</h3>
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>₹5897</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Shipping</span>
+                            <span>₹50</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (5%)</span>
+                            <span>₹294.85</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span>₹6241.85</span>
+                        </div>
+                    </div>
+                    <div class="coupon-section">
+                        <input type="text" placeholder="Enter coupon code">
+                        <button class="apply-btn">Apply</button>
+                    </div>
+                    <button class="checkout-btn">Proceed to Checkout</button>
+                    <a href="products.html" class="continue-shopping">
+                        <i class="fas fa-arrow-left"></i> Continue Shopping
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Empty Cart State (hidden by default) -->
+            <div class="empty-cart" style="display: none;">
+                <i class="fas fa-shopping-cart"></i>
+                <h2>Your cart is empty</h2>
+                <p>Looks like you haven't added anything to your cart yet</p>
+                <a href="products.html" class="shop-btn">Shop Now</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>Hare Krishna Udyog</h3>
+                    <p>Preserving traditional Indian craftsmanship with devotion and sustainability.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Vrindavan, Uttar Pradesh</p>
+                    <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+                    <p><i class="fas fa-envelope"></i> info@harekrsnaudyog.com</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Hare Krishna Udyog. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cart.js"></script>
+</body>
+</html>

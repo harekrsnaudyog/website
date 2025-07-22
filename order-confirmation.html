@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation - Harekrsna Udyog</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #4a8b29;
+      --secondary-color: #ff6b6b;
+      --dark-color: #333;
+      --light-color: #f4f4f4;
+      --white: #fff;
+      --black: #000;
+      --gray: #ddd;
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-main);
+      line-height: 1.6;
+      color: var(--dark-color);
+      background-color: var(--white);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+      overflow: hidden;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: var(--primary-color);
+      color: var(--white);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+    
+    .btn:hover {
+      background: #3a6b1f;
+      transform: translateY(-2px);
+    }
+    
+    .btn-secondary {
+      background: var(--secondary-color);
+    }
+    
+    .btn-secondary:hover {
+      background: #e05555;
+    }
+    
+    .section-title {
+      font-size: 32px;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50%;
+      height: 3px;
+      background: var(--primary-color);
+    }
+
+    /* Header Styles */
+    header {
+      background-color: var(--white);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      width: 50px;
+      margin-right: 10px;
+    }
+    
+    nav ul {
+      display: flex;
+    }
+    
+    nav ul li {
+      margin-left: 20px;
+    }
+    
+    nav ul li a {
+      color: var(--dark-color);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    nav ul li a:hover {
+      color: var(--primary-color);
+    }
+    
+    .active {
+      color: var(--primary-color) !important;
+      font-weight: bold;
+    }
+    
+    .menu-toggle {
+      display: none;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    /* Confirmation Section */
+    .confirmation-section {
+      padding: 50px 0;
+      text-align: center;
+    }
+
+    .confirmation-icon {
+      font-size: 80px;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+
+    .confirmation-message {
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    .order-details {
+      background: var(--light-color);
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      text-align: left;
+    }
+
+    .order-details h3 {
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    .detail-row {
+      display: flex;
+      margin-bottom: 15px;
+    }
+
+    .detail-label {
+      font-weight: bold;
+      width: 150px;
+    }
+
+    .order-summary {
+      margin-top: 30px;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--gray);
+    }
+
+    .summary-total {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: var(--dark-color);
+      color: var(--white);
+      padding: 50px 0 20px;
+    }
+    
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-col h3 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--primary-color);
+    }
+    
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-col ul li a {
+      color: var(--gray);
+      transition: color 0.3s;
+    }
+    
+    .footer-col ul li a:hover {
+      color: var(--white);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .social-links a {
+      color: var(--white);
+      background: rgba(255,255,255,0.1);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+    
+    .social-links a:hover {
+      background: var(--primary-color);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 14px;
+      color: var(--gray);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .logo {
+        margin-bottom: 15px;
+      }
+      
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      nav ul li {
+        margin: 10px 0;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
+      
+      nav ul {
+        display: none;
+      }
+      
+      nav ul.active {
+        display: flex;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .detail-row {
+        flex-direction: column;
+      }
+
+      .detail-label {
+        width: 100%;
+        margin-bottom: 5px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section-title {
+        font-size: 28px;
+      }
+      
+      .confirmation-icon {
+        font-size: 60px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <img src="logo.jpeg.jpeg" alt="Harekrsna Udyog Logo">
+        <span>Harekrsna Udyog</span>
+      </div>
+      
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+        </ul>
+      </nav>
+      
+      <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Confirmation Section -->
+  <section class="confirmation-section container">
+    <div class="confirmation-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    
+    <h2 class="section-title">Order Confirmed!</h2>
+    
+    <div class="confirmation-message">
+      <p>Thank you for your order! We've received it and are preparing your items for shipment. You'll receive a confirmation email shortly with all the details.</p>
+    </div>
+    
+    <div class="order-details">
+      <h3>Order Details</h3>
+      
+      <div class="detail-row">
+        <span class="detail-label">Order Number:</span>
+        <span id="orderNumber">#HKU-<span id="orderNum"></span></span>
+      </div>
+      
+      <div class="detail-row">
+        <span class="detail-label">Date:</span>
+        <span id="orderDate"></span>
+      </div>
+      
+      <div class="detail-row">
+        <span class="detail-label">Payment Method:</span>
+        <span id="paymentMethod"></span>
+      </div>
+      
+      <div class="detail-row">
+        <span class="detail-label">Shipping Address:</span>
+        <div>
+          <div id="shippingName"></div>
+          <div id="shippingAddress"></div>
+          <div id="shippingCity"></div>
+          <div id="shippingCountry"></div>
+          <div id="shippingPhone"></div>
+        </div>
+      </div>
+      
+      <div class="order-summary">
+        <h3>Order Summary</h3>
+        <div id="orderItems">
+          <!-- Items will be loaded here by JavaScript -->
+        </div>
+        <div class="summary-total">
+          <span>Total: </span>
+          <span id="orderTotal"></span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="action-buttons">
+      <a href="products.html" class="btn">Continue Shopping</a>
+      <a href="index.html" class="btn btn-secondary">Back to Home</a>
+      
+      
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>Harekrsna Udyog</h3>
+          <p>Premium garments for kids, men, and women. Ethical fashion with modern designs.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Shopping Cart</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Customer Service</h3>
+          <ul>
+            <li><a href="shipping.html">Shipping Policy</a></li>
+            <li><a href="returns.html">Returns & Exchanges</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Fashion Street, Delhi, India</li>
+            <li><i class="fas fa-phone"></i> +91 9876543210</li>
+            <li><i class="fas fa-envelope"></i> info@harekrsnaudyog.com</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2023 Harekrsna Udyog. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // order-confirmation.js - Order Confirmation Page
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // ========== Mobile Menu Toggle ==========
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navMenu = document.querySelector('nav ul');
+      
+      menuToggle.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+        this.querySelector('i').classList.toggle('fa-times');
+        this.querySelector('i').classList.toggle('fa-bars');
+      });
+
+      // ========== Load Order Data ==========
+      // In a real app, you would get this from your backend or URL parameters
+      // For demo, we'll use sessionStorage to simulate order data
+      const orderData = JSON.parse(sessionStorage.getItem('lastOrder')) || generateDemoOrder();
+      
+      // ========== Render Order Details ==========
+      function renderOrderDetails() {
+        // Generate random order number if not available
+        if (!orderData.orderNumber) {
+          orderData.orderNumber = 'HKU-' + Math.floor(100000 + Math.random() * 900000);
+        }
+        
+        // Format date
+        const orderDate = new Date(orderData.date);
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        
+        // Display order info
+        document.getElementById('orderNum').textContent = orderData.orderNumber.split('-')[1];
+        document.getElementById('orderDate').textContent = orderDate.toLocaleDateString('en-IN', options);
+        document.getElementById('paymentMethod').textContent = formatPaymentMethod(orderData.payment);
+        document.getElementById('orderTotal').textContent = '₹' + formatPrice(orderData.total);
+        
+        // Display shipping info
+        document.getElementById('shippingName').textContent = orderData.customer.name;
+        document.getElementById('shippingAddress').textContent = orderData.customer.address;
+        document.getElementById('shippingCity').textContent = `${orderData.customer.city}, ${orderData.customer.state} - ${orderData.customer.zip}`;
+        document.getElementById('shippingCountry').textContent = orderData.customer.country;
+        document.getElementById('shippingPhone').textContent = orderData.customer.phone;
+        
+        // Display order items
+        const orderItems = document.getElementById('orderItems');
+        orderItems.innerHTML = orderData.items.map(item => `
+          <div class="summary-item">
+            <span>${item.name} × ${item.quantity}</span>
+            <span>₹${formatPrice(item.price * item.quantity)}</span>
+          </div>
+        `).join('');
+      }
+      
+      // ========== Helper Functions ==========
+      function formatPrice(price) {
+        return price.toLocaleString('en-IN');
+      }
+      
+      function formatPaymentMethod(method) {
+        const methods = {
+          'cod': 'Cash on Delivery (COD)',
+          'credit': 'Credit/Debit Card',
+          'upi': 'UPI Payment'
+        };
+        return methods[method] || method;
+      }
+      
+      function generateDemoOrder() {
+        // This is just for demo purposes
+        // In a real app, this would come from your backend
+        return {
+          orderNumber: 'HKU-' + Math.floor(100000 + Math.random() * 900000),
+          date: new Date().toISOString(),
+          payment: 'cod',
+          customer: {
+            name: 'Rahul Sharma',
+            email: 'rahul@example.com',
+            phone: '9876543210',
+            address: '123 Fashion Street',
+            city: 'Delhi',
+            state: 'Delhi',
+            zip: '110001',
+            country: 'India',
+            notes: 'Please deliver before 5 PM'
+          },
+          items: [
+            {
+              id: 1,
+              name: "Men's Cotton Shirt",
+              price: 999,
+              quantity: 1,
+              image: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+            },
+            {
+              id: 2,
+              name: "Women's Printed Kurti",
+              price: 1299,
+              quantity: 2,
+              image: "https://images.unsplash.com/photo-1595341595379-cf0f2a7ab4a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+            }
+          ],
+          subtotal: 3597,
+          shipping: 0,
+          total: 3597,
+          status: 'processing'
+        };
+      }
+      
+      // ========== Initialize ==========
+      renderOrderDetails();
+    });
+    <script src="order-confirmation.js"></script>
+  </script>
+</body>
+</html>

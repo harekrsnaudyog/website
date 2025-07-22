@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Harekrsna Udyog</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #4a8b29;
+      --secondary-color: #ff6b6b;
+      --dark-color: #333;
+      --light-color: #f4f4f4;
+      --white: #fff;
+      --black: #000;
+      --gray: #ddd;
+      --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: var(--font-main);
+      line-height: 1.6;
+      color: var(--dark-color);
+      background-color: var(--white);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+      overflow: hidden;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: var(--primary-color);
+      color: var(--white);
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+    
+    .btn:hover {
+      background: #3a6b1f;
+      transform: translateY(-2px);
+    }
+    
+    .btn-secondary {
+      background: var(--secondary-color);
+    }
+    
+    .btn-secondary:hover {
+      background: #e05555;
+    }
+    
+    .section-title {
+      font-size: 32px;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50%;
+      height: 3px;
+      background: var(--primary-color);
+    }
+
+    /* Header Styles */
+    header {
+      background-color: var(--white);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      width: 50px;
+      margin-right: 10px;
+    }
+    
+    nav ul {
+      display: flex;
+    }
+    
+    nav ul li {
+      margin-left: 20px;
+    }
+    
+    nav ul li a {
+      color: var(--dark-color);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    nav ul li a:hover {
+      color: var(--primary-color);
+    }
+    
+    .active {
+      color: var(--primary-color) !important;
+      font-weight: bold;
+    }
+    
+    .menu-toggle {
+      display: none;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    /* Checkout Section */
+    .checkout-section {
+      padding: 50px 0;
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 40px;
+    }
+
+    .checkout-form h2 {
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--gray);
+      border-radius: 5px;
+      font-family: var(--font-main);
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(74, 139, 41, 0.2);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .order-summary {
+      background: var(--light-color);
+      padding: 25px;
+      border-radius: 10px;
+      align-self: start;
+      position: sticky;
+      top: 100px;
+    }
+
+    .order-summary h2 {
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    .summary-items {
+      margin-bottom: 20px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--gray);
+    }
+
+    .summary-totals {
+      margin-top: 20px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .summary-row.total {
+      font-weight: bold;
+      font-size: 18px;
+      border-top: 1px solid var(--gray);
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+
+    .payment-methods {
+      margin-top: 30px;
+    }
+
+    .payment-method {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 15px;
+      border: 1px solid var(--gray);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .payment-method:hover {
+      border-color: var(--primary-color);
+    }
+
+    .payment-method input {
+      margin-right: 15px;
+    }
+
+    .payment-method label {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .payment-icon {
+      margin-left: auto;
+      font-size: 24px;
+      color: var(--primary-color);
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: var(--dark-color);
+      color: var(--white);
+      padding: 50px 0 20px;
+    }
+    
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .footer-col h3 {
+      font-size: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--primary-color);
+    }
+    
+    .footer-col ul li {
+      margin-bottom: 10px;
+    }
+    
+    .footer-col ul li a {
+      color: var(--gray);
+      transition: color 0.3s;
+    }
+    
+    .footer-col ul li a:hover {
+      color: var(--white);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+    
+    .social-links a {
+      color: var(--white);
+      background: rgba(255,255,255,0.1);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+    
+    .social-links a:hover {
+      background: var(--primary-color);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 14px;
+      color: var(--gray);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .logo {
+        margin-bottom: 15px;
+      }
+      
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      nav ul li {
+        margin: 10px 0;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
+      
+      nav ul {
+        display: none;
+      }
+      
+      nav ul.active {
+        display: flex;
+      }
+
+      .checkout-section {
+        grid-template-columns: 1fr;
+      }
+
+      .order-summary {
+        position: static;
+        margin-top: 40px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section-title {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <img src="logo.jpeg.jpeg" alt="Harekrsna Udyog Logo">
+        <span>Harekrsna Udyog</span>
+      </div>
+      
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+        </ul>
+      </nav>
+      
+      <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Checkout Section -->
+  <section class="checkout-section container">
+    <div class="checkout-form">
+      <h2 class="section-title">Checkout</h2>
+      
+      <form id="checkoutForm">
+        <h3>Shipping Information</h3>
+        <div class="form-group">
+          <label for="fullName">Full Name*</label>
+          <input type="text" id="fullName" name="fullName" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address*</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">Phone Number*</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="address">Street Address*</label>
+          <input type="text" id="address" name="address" required>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="city">City*</label>
+            <input type="text" id="city" name="city" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="state">State*</label>
+            <input type="text" id="state" name="state" required>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="zip">ZIP Code*</label>
+            <input type="text" id="zip" name="zip" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="country">Country*</label>
+            <select id="country" name="country" required>
+              <option value="">Select Country</option>
+              <option value="India" selected>India</option>
+              <option value="USA">United States</option>
+              <option value="UK">United Kingdom</option>
+              <option value="Canada">Canada</option>
+              <option value="Australia">Australia</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="notes">Order Notes (Optional)</label>
+          <textarea id="notes" name="notes" rows="3"></textarea>
+        </div>
+        
+        <div class="payment-methods">
+          <h3>Payment Method</h3>
+          
+          <div class="payment-method">
+            <input type="radio" id="cod" name="payment" value="cod" checked>
+            <label for="cod">
+              Cash on Delivery (COD)
+              <i class="fas fa-money-bill-wave payment-icon"></i>
+            </label>
+          </div>
+          
+          <div class="payment-method">
+            <input type="radio" id="credit" name="payment" value="credit">
+            <label for="credit">
+              Credit/Debit Card
+              <i class="far fa-credit-card payment-icon"></i>
+            </label>
+          </div>
+          
+          <div class="payment-method">
+            <input type="radio" id="upi" name="payment" value="upi">
+            <label for="upi">
+              UPI Payment
+              <i class="fas fa-mobile-alt payment-icon"></i>
+            </label>
+          </div>
+        </div>
+        
+        <button type="submit" class="btn" style="margin-top: 20px; width: 100%;">
+          Place Order
+        </button>
+      </form>
+    </div>
+    
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      <div class="summary-items" id="orderItems">
+        <!-- Items will be loaded here by JavaScript -->
+      </div>
+      
+      <div class="summary-totals" id="orderTotals">
+        <!-- Totals will be loaded here by JavaScript -->
+      </div>
+      
+      <a href="cart.html" class="btn btn-secondary" style="width: 100%; margin-top: 20px;">
+        <i class="fas fa-arrow-left"></i> Back to Cart
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>Harekrsna Udyog</h3>
+          <p>Premium garments for kids, men, and women. Ethical fashion with modern designs.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Shopping Cart</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Customer Service</h3>
+          <ul>
+            <li><a href="shipping.html">Shipping Policy</a></li>
+            <li><a href="returns.html">Returns & Exchanges</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Fashion Street, Delhi, India</li>
+            <li><i class="fas fa-phone"></i> +91 9876543210</li>
+            <li><i class="fas fa-envelope"></i> info@harekrsnaudyog.com</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2023 Harekrsna Udyog. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="checkout.js"></script>
+</body>
+</html>
